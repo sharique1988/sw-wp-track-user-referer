@@ -20,7 +20,7 @@ function swwp_set_new_user_cookie(){
 	if(!empty($cookie_value)){
 	
 		if ( !is_admin() && !isset($_COOKIE['swwp_new_user_referer'])){
-			setcookie( 'swwp_new_user_referer', $cookie_value, time()+3600*24*30, COOKIEPATH, COOKIE_DOMAIN, false);
+			setcookie( 'swwp_new_user_referer', sanitize_text_field($cookie_value), time()+3600*24*30, COOKIEPATH, COOKIE_DOMAIN, false);
 		}
 	}
 }
@@ -61,7 +61,7 @@ add_filter( 'manage_users_custom_column', 'swwp_add_value_in_user_table_column_i
 function swwp_add_value_in_user_table_column_in_admin_area( $val, $column_name, $user_id ) {
     switch ($column_name) {
         case 'swwp_user_referer_url' :
-            return get_user_meta($user_id, 'swwp_referal_url', true );
+            return esc_url(get_user_meta($user_id, 'swwp_referal_url', true ));
         default:
     }
     return $val;
