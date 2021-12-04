@@ -34,7 +34,7 @@ function swwp_set_new_user_cookie(){
 add_action( 'user_register', 'swwp_save_referer', 10, 1 );
 function swwp_save_referer($user_id){
     if (isset( $_COOKIE['swwp_new_user_referer'])){
-        update_user_meta($user_id, 'swwp_referal_url', $_COOKIE['swwp_new_user_referer']);
+        update_user_meta($user_id, 'swwp_referal_url', sanitize_text_field($_COOKIE['swwp_new_user_referer']));
 	}
 }
 
